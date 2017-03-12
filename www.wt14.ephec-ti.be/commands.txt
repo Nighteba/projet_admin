@@ -1,0 +1,21 @@
+
+GENERAL
+-------
+sudo docker run -it --name 'my_container_name' -d -p 'my_port_number':80 'image_id'
+
+TO MAKE IT WORK
+----------------
+sudo docker run -it -d -p 8080:80 he201408/www.wt14.ephec-ti.be
+sudo docker run -it -d -p 3000:80 he201408/intranet.wt14.ephec-ti.be
+
+
+//NOT NEEDED ANYMORE
+-----------------------------------------------------------------------------------------------------
+sudo docker run -it --name 'my_container_name' -d -p 'my_port_number':80 -v /home/samuel/websites/wt14.ephec-ti.be:/var/www/html 'image_id'
+-----------------------------------------------------------------------------------------------------
+
+
+
+//REMOVE EXITED DOCKER CONTAINERS (IF NAMES ARE SIMILAR / ERROR)
+----------------------------------------------------------------
+sudo docker rm $(sudo docker ps -q -f status=exited)

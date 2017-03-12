@@ -5,8 +5,8 @@ sudo docker run -it --name 'my_container_name' -d -p 'my_port_number':80 'image_
 
 TO MAKE IT WORK
 ----------------
-sudo docker run -it --name wt14 -d -p 8080:80 he201408/wt14.ephec-ti.be
-
+sudo docker run -it -d -p 8080:80 he201408/www.wt14.ephec-ti.be
+sudo docker run -it -d -p 3000:80 he201408/intranet.wt14.ephec-ti.be
 
 
 //NOT NEEDED ANYMORE
