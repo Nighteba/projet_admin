@@ -1,6 +1,3 @@
-APACHE
----------
-
 FROM ubuntu:15.04
 MAINTAINER HE201408@students.ephec.be
 RUN apt-get update && apt-get upgrade
