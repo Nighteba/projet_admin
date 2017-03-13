@@ -1,0 +1,75 @@
+\documentclass[a4paper,12pt]{article}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+
+\usepackage{vmargin}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\let\oldtheta\theta
+\renewcommand{\theta}{\ensuremath{\oldtheta}}
+
+%\addtolength{\textwidth}{1cm}
+%\usepackage{geometry}
+\setlength{\parindent}{0mm}
+
+\renewcommand{\arraystretch}{2}
+
+\begin{document}
+
+% Page de titre
+\titlepage{
+	\today \\[2cm]
+	\begin{flushright}\sf\Huge
+	{\bfseries Administration système et réseaux II} \\[3mm]
+	{\bfseries Module 1 - Mise en place d’une infrastructure Web et DNS
+} \\[2mm]
+	{\huge Rapport module 1}
+	\end{flushright}
+	\ \\[2cm]
+	\begin{center}
+	
+\end{center}
+	\vspace{4cm}
+	Samuel Petre, Quentin Puttemans, Arnaud Renard - Groupe 14 - 2TL2\\
+}
+
+\clearpage
+
+%\vspace{5cm}
+\section{Cahier des charges}
+	\paragraph{} L'entreprise Woodytoys nous demande d'implémenter une architecture permettant la mise en place de trois services web. Le nom de domaine de base sera wt14.ephec-ti.be. Nous aurons donc trois noms de domaine à gérer : \begin{itemize}
+	\item www.wt14.ephec-ti.be
+	\item b2b.wt14.ephec-ti.be
+	\item intranet.wt14.ephec-ti.be
+	\end{itemize}
+	\paragraph{} www.wt14.ephec-ti.be sera un site statique.
+	\paragraph{} b2b.wt14.ephec-ti.be sera un site dynamique comportant une base de données permettant aux revendeurs de passer des commandes.
+	\paragraph{} intranet.wt14.ephec-ti.be sera un site permettant aux employés d'avoir accès à un l'intranet. Ce site sera donc impossible à atteindre depuis l'Internet.
+	\paragraph{} Nous devons donc implémenter et configurer adéquatement un serveur web, un résolveur DNS, une base de données, ainsi que trois pages web.
+	
+	
+\section{Proposition de solutions techniques}
+	\paragraph{} Premièrement, en ce qui concerne le serveur web, nous avons hésité entre Apache et Nginx. Nous avons décidé d'utiliser Apache après avoir appris que Nginx ne pouvait pas traiter du contenu dynamique nativement. Nous avons donc choisi Apache par soucis de simplicité. De plus Apache possède actuellement une plus grande part de marché que Nginx.
+	\paragraph{} Nous avons créé une base de données SQL se trouvant sur un serveur distant 193.190.65.94:3306. Nous aurions aussi pu créer la base de données en local. Chacune de ces solutions a ses pours et ses contres mais en fin de compte, aucune n'est supérieure à l'autre.
+	\paragraph{} Concernant le DNS, nous avons utilisé bind car c'est le plus répandu et que nous n'en connaissons pas d'autres.
+		
+\section{Rapport sur ce qui a été déployé}
+	\paragraph{} Nous n'avons pour l'instant déployé qu'environ la moitié des éléments demandés. Tous ont été commencé, mais certains ne fonctionnent pas encore.
+	\paragraph{} Le site statique a été créé et est joignable depuis l'Internet.
+	\paragraph{} Le site dynamique contenant une base de données est implémenté, mais un problème l'empêche de se connecter à la base de données que nous avons créé.
+	\paragraph{} Le site intranet est aussi implémenté, mais est encore joignable depuis l'Internet.
+	\paragraph{} Pour le moment, les différents sites ne sont pas accessibles via leur URL, mais uniquement via leur adresse IP, ou URL du VPS que nous utilisons car notre DNS n'est pas encore fonctionnel.
+	
+\section{Explication de la procédure de validation}
+	\paragraph{} Pour vérifier le fonctionnement du site statique, nous nous sommes tout simplement rendu sur http://vps375374.ovh.net/ qui est l'adresse du serveur sur lequel est enregistré l'ensemble des fichiers. Nous constatons que le site est uniquement disponible lorsque le serveur web est lancé.
+	\paragraph{} Nous avons fais de même pour le site dynamique, bien que un problème persiste dans celui-ci pour le moment.
+	\paragraph{} Nous n'avons pas encore implémenté l'intranet et le DNS, il nous est donc impossible de les tester.
+
+\end{document}
