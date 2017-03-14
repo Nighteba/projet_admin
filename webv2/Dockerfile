@@ -20,6 +20,8 @@ ENV APACHE_PID_FILE /var/run/apache2.pid
 
 EXPOSE 80
 
+ADD www/www.wt14.ephec-ti.be /var/www/www.wt14.ephec-ti.be
+ADD www/intranet.wt14.ephec-ti.be /var/www/intranet.wt14.ephec-ti.be
 ADD www/b2b.wt14.ephec-ti.be /var/www/b2b.wt14.ephec-ti.be
 ADD apache-config.conf /etc/apache2/sites-enabled/000-default.conf
 CMD ["apache2ctl", "-D", "FOREGROUND"]]
