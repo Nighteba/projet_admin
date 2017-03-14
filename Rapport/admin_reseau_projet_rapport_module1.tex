@@ -61,15 +61,15 @@
 	\paragraph{} Concernant le DNS, nous avons utilisé bind car c'est le plus répandu et que nous n'en connaissons pas d'autres.
 		
 \section{Rapport sur ce qui a été déployé}
-	\paragraph{} Nous n'avons pour l'instant déployé qu'environ la moitié des éléments demandés. Tous ont été commencé, mais certains ne fonctionnent pas encore.
+	\paragraph{} Nous avons pour le moment déployé les 4/5 des éléments demandés. Il ne reste qu'à implémenter l'intranet, ainsi que régler un problème de base de données.
 	\paragraph{} Le site statique a été créé et est joignable depuis l'Internet.
 	\paragraph{} Le site dynamique contenant une base de données est implémenté, mais un problème l'empêche de se connecter à la base de données que nous avons créé.
 	\paragraph{} Le site intranet est aussi implémenté, mais est encore joignable depuis l'Internet.
-	\paragraph{} Pour le moment, les différents sites ne sont pas accessibles via leur URL, mais uniquement via leur adresse IP, ou URL du VPS que nous utilisons car notre DNS n'est pas encore fonctionnel.
+	\paragraph{} Le DNS est presque totalement déployé, il ne reste qu'à y ajouter l'intranet.
 	
 \section{Explication de la procédure de validation}
-	\paragraph{} Pour vérifier le fonctionnement du site statique, nous nous sommes tout simplement rendu sur http://vps375374.ovh.net/ qui est l'adresse du serveur sur lequel est enregistré l'ensemble des fichiers. Nous constatons que le site est uniquement disponible lorsque le serveur web est lancé.
-	\paragraph{} Nous avons fais de même pour le site dynamique, bien que un problème persiste dans celui-ci pour le moment.
-	\paragraph{} Nous n'avons pas encore implémenté l'intranet et le DNS, il nous est donc impossible de les tester.
+	\paragraph{} Pour vérifier le fonctionnement du site statique, nous nous sommes tout simplement rendu sur http://www.wt14.ephec-ti.be/ via une machine externe afin d'être certain que le site soit accessible depuis internet.
+	\paragraph{} Nous avons fais de même pour le site dynamique, mais cette fois-ci avec le lien http://b2b.wt14.ephec-ti.be/, bien qu'un problème de base de données persiste dans celui-ci pour le moment.
+	\paragraph{} Nous n'avons pas encore implémenté l'intranet : celui-ci est encore accessible depuis l'Internet.
 
 \end{document}
