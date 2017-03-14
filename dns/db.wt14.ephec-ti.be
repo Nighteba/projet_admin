@@ -1,5 +1,5 @@
-$ttl 38400
-wt14.ephec-ti.be	IN	SOA	ns1.wt14.ephec-ti.be. HE201408@students.ephec.be. (
+$TTL 38400
+wt14.ephec-ti.be.	IN	SOA	ns1.wt14.ephec-ti.be. HE201408@students.ephec.be. (
 									340000
 									15000
 									10000
