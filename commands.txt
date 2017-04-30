@@ -6,6 +6,7 @@ docker build --no-cache -t "nameOfImage" .
 
 TO MAKE IT WORK
 ----------------
+sudo docker run -it -d -p 80:80 apache
 sudo docker run -it -d -p 80:80 he201408/www.wt14.ephec-ti.be
 sudo docker run -it -d -p 8080:80 he201408/intranet.wt14.ephec-ti.be
 sudo docker run -it -d -p 3000:80 he201408/b2b.wt14.ephec-ti.be
@@ -13,6 +14,8 @@ sudo docker run -it -d -p 3000:80 he201408/b2b.wt14.ephec-ti.be
 
 sudo docker run -it -d -p 53:53/udp -p 53:53/tcp dns
 
+
+sudo docker run -it -d -p 9080:80 -p 5060:5060/tcp -p 5060:5060/udp -p 16384:16384/udp -p 16385:16385/udp -p 16386:16386/udp -p 16387:16387/udp -p 16388:16388/udp -p 16389:16389/udp -p 16390:16390/udp -p 16391:16391/udp -p 16392:16392/udp -p :16393/udp -p 16394:16394/udp asterisk001
 
 //NOT NEEDED ANYMORE
 -----------------------------------------------------------------------------------------------------
@@ -28,5 +31,10 @@ sudo docker rm $(sudo docker ps -q -f status=exited)
 docker exec -it <mycontainer> bash
 
 
-
-docker run \ --name $NAME_ASTERISK \ --net=host \ -d -t dougbtv/asterisk
+--------------
+DEBUG ASTERISK
+--------------
+asterisk -r
+sip show registry
+sip show subscriptions
+sip show peers
