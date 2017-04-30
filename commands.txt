@@ -26,3 +26,7 @@ sudo docker run -it --name 'my_container_name' -d -p 'my_port_number':80 -v /hom
 sudo docker rm $(sudo docker ps -q -f status=exited)
 
 docker exec -it <mycontainer> bash
+
+
+
+docker run \ --name $NAME_ASTERISK \ --net=host \ -d -t dougbtv/asterisk
