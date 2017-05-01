@@ -1,0 +1,101 @@
+\documentclass[a4paper,12pt]{article}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+
+\usepackage{vmargin}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\let\oldtheta\theta
+\renewcommand{\theta}{\ensuremath{\oldtheta}}
+
+%\addtolength{\textwidth}{1cm}
+%\usepackage{geometry}
+\setlength{\parindent}{0mm}
+
+\renewcommand{\arraystretch}{2}
+
+\begin{document}
+
+% Page de titre
+\titlepage{
+	\today \\[2cm]
+	\begin{flushright}\sf\Huge
+	{\bfseries Administration système et réseaux II} \\[3mm]
+	{\bfseries Module 3 - Mise en place d’une
+infrastructure VoIP
+} \\[2mm]
+	{\huge Rapport module 3}
+	\end{flushright}
+	\ \\[2cm]
+	\begin{center}
+	
+\end{center}
+	\vspace{4cm}
+	Samuel Petre, Quentin Puttemans, Arnaud Renard - Groupe 14 - 2TL2\\
+}
+
+\clearpage
+
+%\vspace{5cm}
+\section{Cahier des charges}
+	\paragraph{} L’entreprise souhaite adopter une téléphonie basée sur IP. Cela signifie
+deux choses :
+ \begin{itemize}
+	\item L’entreprise doit être accessible en VoIP depuis Internet, afin que des
+clients puissent la contacter. Les appels doivent aboutir sur le poste
+de la secrétaire.
+	\item Les employés disposent de softphones sur leurs ordinateurs, à l’exception
+des ouvriers qui ont un poste de téléphonie IP à disposition.
+
+	\item Les employés de l’entreprise doivent pouvoir communiquer 		entre eux,
+à l’intérieur de l’entreprise, mais également depuis l’extérieur dans
+le cas des commerciaux qui sont souvent en déplacement. Les types
+d’employés sont les suivants :
+	\begin{itemize}
+		\item Les ouvriers : Ils disposent d’un poste de téléphonie IP dans leur
+atelier pour joindre les autres départements internes.
+
+		\item La secrétaire : Elle dispose d’un PC sur lequel se trouve un softphone,
+lui permettant de contacter n’importe qui.
+		\item Le service comptable : Réparti dans deux bureaux, il dispose d’un numéro unique permettant de joindre le premier comptable disponible,
+ainsi que d’un numéro spécifique par bureau. Les comptables
+peuvent joindre l'extérieur et tout le monde en interne à
+l’exception du directeur.
+		\item Les commerciaux : Réunis dans un même bureau, ils peuvent
+joindre l’extérieur et tout le monde en interne à l'exception du
+directeur. Ils disposent également de smartphones avec lesquels ils
+peuvent téléphoner en déplacement.
+		\item La direction : Un numéro qui peut joindre tous les autres postes
+internes ainsi que l’extérieur. Ce numéro ne peut pas être joint
+directement, les appels devant transiter préalablement par la secrétaire.
+	\end{itemize}
+	\item Les employés doivent pouvoir disposer d’une boîte vocale.
+	\end{itemize}
+		
+	
+\section{Proposition de solutions techniques}
+	\paragraph{} Nous avons directement pensé à utiliser Asterisk car c'est un système comportant énormément de ressources et capable de faire énormément de choses. C'est à dire, que ce système sera capable de supporter la majorité des demandes du futur.
+	\paragraph{} La configuration actuelle est capable de gérer 1000 employés par secteur (ouvriers, comptables, secrétaires, etc). 
+	\paragraph{} Pour ajouter un nouveau numéro pour, par exemple, un nouvel employé, il faut aller dans le fichier users.conf et en dessous du bon secteur (par exemple [ouvriers](commun)), créer un nouveau numéro de la façon suivante : \newline \newline
+	[2003](ouvriers)\newline
+	username=ouvriers3\newline
+	secret=passwd\newline
+	
+	2003 sera le numero de telephone de l'employé, (ouvriers) est le type de l'employé, username est son nom et secret est son mot de passe.
+	\paragraph{} Si un comptable est rajouté, il faudra se rendre dans le fichier extensions.conf et à la ligne \newline \newline exten => 3999,1,Dial(SIP/3001\&SIP/3002,20) \newline \newline ajouter avant le ",20)" "SIP/3XXX" avec 3XXX le numero du nouveau comptable. par exemple un nouveau comptable avec le numero 3003, nous aurions : \newline \newline exten => 3999,1,Dial(SIP/3001\&SIP/3002\&SIP/3003,20) \newline \newline C'ets cette ligne qui permet que tous les comptables soient appelés lorsque le numero 3999 est appelé.
+		
+\section{Rapport sur ce qui a été déployé}
+	\paragraph{} L'ensemble des fonctionnalités de base ont été implémentées. Il est possible de passer des appels en respectant le cahier des charges donné. 
+	\paragraph{} Il ne reste qu'une petite chose à améliorer : la redirection d'appel pour que la secrétaire puisse rediriger les appels vers la direction.
+	
+\section{Explication de la procédure de validation}
+	\paragraph{} Pour vérifier le fonctionnement de la voix par IP, nous avons utilisé le logiciel X-LITE sur un PC fixe, et l'application Zoiper sur Ipod. Nous nous sommes ensuite chacun connecté sur des comptes différents et nous avons réussi à nous joindre avec succès. 
+
+\end{document}
