@@ -12,7 +12,7 @@ EXPOSE 587
 EXPOSE 993
 
 ADD postfix/master.cf /etc/postfix/master.cf
-#ADD postfix/main.cf /etc/postfix/main.cf
+ADD postfix/main.cf /etc/postfix/main.cf
 #ADD postfix/aliases /etc/aliases
 #ADD dovecot/dovecot.conf /etc/dovecot/dovecot.conf
 ADD dovecot/10-master.conf /etc/dovecot/conf.d/
