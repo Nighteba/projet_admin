@@ -8,9 +8,9 @@ include ('mesFonction.inc.php');
     try {
         $dbh = new PDO('mysql:host='.getServer().';dbname='.$dbName, 'PETRE', 'SamuelFv77');
         $donnee = $dbh->query($sql);
-				$donnee->execute();
-				echo(creeTableau($donnee->fetchAll(PDO::FETCH_ASSOC), 'Liste des produits', true));
-				$donnee -> closeCursor();
+                                $donnee->execute();
+                                echo(creeTableau($donnee->fetchAll(PDO::FETCH_ASSOC), 'Liste des produits', true));
+                                $donnee -> closeCursor();
         $dbh = null;
     }
     catch (PDOException $e) {

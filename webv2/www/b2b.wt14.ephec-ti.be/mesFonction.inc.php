@@ -39,10 +39,5 @@
     }
 
     function getServer() {
-        if ($_SERVER['REMOTE_ADDR']=='127.0.0.1') {
-            return '193.190.65.94';
-        }
-        else {
-            return 'localhost';
-        }
+        return '193.190.65.94';
     }
