@@ -23,5 +23,5 @@ RUN chmod -R 777 /start.sh
 
 VOLUME ["/var/mail","/home"]
 
-CMD /start.sh
-#ENTRYPOINT ["/start.sh"]
+#CMD /start.sh
+ENTRYPOINT ["/start.sh"]
