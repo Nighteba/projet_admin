@@ -17,6 +17,8 @@ ADD dovecot/10-ssl.conf /etc/dovecot/conf.d/10-ssl.conf
 ADD start.sh /start.sh
 RUN chmod -R 777 /start.sh
 
+RUN postalias /etc/aliases
+
 VOLUME ["/var/mail","/home/samuel"]
 
 #SMTP
