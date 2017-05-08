@@ -18,9 +18,15 @@ RUN chmod -R 777 /start.sh
 
 VOLUME ["/var/mail","/home"]
 
+#SMTP
 EXPOSE 25
+#unfitlered SMTP
+EXPOSE 2525
+#this is the default IMAP non-encrypted port
 EXPOSE 143
+#This is the default mail submission port
 EXPOSE 587
+#IMAP securely
 EXPOSE 993
 
 CMD ["/start.sh"]
