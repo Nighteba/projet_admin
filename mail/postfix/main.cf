@@ -1,4 +1,5 @@
 #short version config
+mydomain = wt14.ephec-ti.be
 myhostname = mail.wt14.ephec-ti.be
 myorigin = $mydomain
 mydestination = mail.wt14.ephec-ti.be, wt14.ephec-ti.be, localhost, localhost.localdomain
