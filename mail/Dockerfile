@@ -23,5 +23,4 @@ EXPOSE 143
 EXPOSE 587
 EXPOSE 993
 
-#CMD /start.sh
-#ENTRYPOINT ["/start.sh"]
+CMD ["/start.sh"]
