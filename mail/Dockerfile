@@ -18,8 +18,6 @@ RUN chmod -R 777 /start.sh
 
 VOLUME ["/var/mail","/home"]
 
-run apt-get install -q -y syslog-ng
-
 #SMTP
 EXPOSE 25
 #unfitlered SMTP
