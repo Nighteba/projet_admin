@@ -18,6 +18,8 @@ RUN chmod -R 777 /start.sh
 
 VOLUME ["/var/mail","/home"]
 
+run apt-get install -q -y syslog-ng
+
 #SMTP
 EXPOSE 25
 #unfitlered SMTP
@@ -29,4 +31,5 @@ EXPOSE 587
 #IMAP securely
 EXPOSE 993
 
-CMD ["/start.sh"]
+cmd ["sh", "-c", service postfix start ; tail -F /var/log/mail.log"]
+#CMD ["/start.sh"]
