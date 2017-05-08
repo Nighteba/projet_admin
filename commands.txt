@@ -31,6 +31,8 @@ sudo docker rm $(sudo docker ps -q -f status=exited)
 
 docker exec -it <mycontainer> bash
 
+netstat -lntup
+
 
 --------------
 DEBUG ASTERISK
