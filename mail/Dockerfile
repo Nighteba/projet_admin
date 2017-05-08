@@ -3,6 +3,7 @@ MAINTAINER HE201408@students.ephec.be
 
 RUN apt-get -y update
 RUN apt-get -y upgrade
+RUN apt-get install rsyslog
 RUN apt-get install -y postfix
 RUN apt-get install -y dovecot-common dovecot-imapd dovecot-pop3d
 RUN apt-get install -y mailutils
