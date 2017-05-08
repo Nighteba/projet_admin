@@ -9,4 +9,5 @@ webmaster: root
 www: root
 ftp: root
 abuse: root
+contact: root
 root: samuel
