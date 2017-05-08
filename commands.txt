@@ -26,12 +26,6 @@ sudo docker run -it --name 'my_container_name' -d -p 'my_port_number':80 -v /hom
 
 //REMOVE EXITED DOCKER CONTAINERS (IF NAMES ARE SIMILAR / ERROR)
 ----------------------------------------------------------------
-REMOVE ALL STOPPED CONTAINERS
-sudo docker ps -q |xargs docker rm
-
-REMOVE CALL UNSED IMAGES
-sudo docker images -q |xargs docker rmi
-
 
 sudo docker rm $(sudo docker ps -q -f status=exited)
 
