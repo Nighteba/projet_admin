@@ -19,8 +19,6 @@ RUN chmod -R 777 /start.sh
 
 VOLUME ["/var/mail","/home/samuel"]
 
-CMD ["/start.sh"]
-
 #SMTP
 EXPOSE 25
 #unfitlered SMTP
