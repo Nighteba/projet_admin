@@ -31,5 +31,5 @@ EXPOSE 587
 #IMAP securely
 EXPOSE 993
 
-cmd ["sh", "-c", service postfix start ; tail -F /var/log/mail.log"]
+#CMD ["sh", "-c", service postfix start ; tail -F /var/log/mail.log"]
 #CMD ["/start.sh"]
