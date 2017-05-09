@@ -3,7 +3,7 @@ MAINTAINER HE201408@students.ephec.be
 
 RUN apt-get -y update
 RUN apt-get -y upgrade
-RUN apt-get install rsyslog
+RUN apt-get install -y rsyslog
 RUN apt-get install -y postfix
 RUN apt-get install -y dovecot-common dovecot-imapd dovecot-pop3d
 RUN apt-get install -y mailutils
@@ -34,4 +34,4 @@ EXPOSE 587
 EXPOSE 993
 
 #CMD ["sh", "-c", service postfix start ; tail -F /var/log/mail.log"]
-#CMD ["/start.sh"]
+CMD ["sh", "-c", /start.sh"]
