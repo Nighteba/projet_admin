@@ -34,4 +34,4 @@ EXPOSE 587
 EXPOSE 993
 
 #CMD ["sh", "-c", service postfix start ; tail -F /var/log/mail.log"]
-CMD ["sh", "-c", /start.sh"]
+CMD ["sh", "-c", "/start.sh"]
