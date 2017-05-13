@@ -1,0 +1,24 @@
+Lancer le server sql
+----------------------
+sudo docker run -d -e MYSQL_ROOT_PASSWORD= -p 3307:3307 mysql:latest
+
+Lier server sql
+----------------
+sudo docker run --link container:mysql -d app-that-uses-mysql 
+
+Avec volume
+------------
+sudo docker run -v ~/sql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD= -d -p 3307:3307 mysql/mysql-server:latest
+
+
+IN database
+-----------
+docker exec -it <container id> /bin/bash
+mysql -u root -p
+password = "" (blank)
+
+create database shop
+use shop
+create table produit (npro varchar(4), libelle varchar(100), prix int, qstock int);
+
+insert into produit (npro, libelle, prix, qstock) values("AR01", "Generateur", 150, 24),("BR01", "visse", 1, 350),("CL01", "clou", 1, 350),("CR01", "marteau", 15, 80);
