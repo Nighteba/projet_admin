@@ -1,0 +1,71 @@
+\documentclass[a4paper,12pt]{article}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+
+\usepackage{vmargin}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\let\oldtheta\theta
+\renewcommand{\theta}{\ensuremath{\oldtheta}}
+
+%\addtolength{\textwidth}{1cm}
+%\usepackage{geometry}
+\setlength{\parindent}{0mm}
+
+\renewcommand{\arraystretch}{2}
+
+\begin{document}
+
+% Page de titre
+\titlepage{
+	\today \\[2cm]
+	\begin{flushright}\sf\Huge
+	{\bfseries Administration système et réseaux II} \\[3mm]
+	{\bfseries Module 2 - Mise en place d’une
+infrastructure Mail
+} \\[2mm]
+	{\huge Rapport module 2}
+	\end{flushright}
+	\ \\[2cm]
+	\begin{center}
+	
+\end{center}
+	\vspace{4cm}
+	Samuel Petre, Quentin Puttemans, Arnaud Renard - Groupe 14 - 2TL2\\
+}
+
+\clearpage
+
+%\vspace{5cm}
+\section{Cahier des charges}
+	\paragraph{} L’entreprise disposant d’un nom de domaine, souhaite proposer une boîte
+mail à l’ensemble de ses employés. Chaque employé doit donc disposer d’une
+adresse mail type nom.prenom@<domaine>. En plus de cela, l’entreprise
+souhaite également créer des adresses mail de service génériques (contact@<domaine>,
+b2b@<domaine> par exemple), qui seront redirigées au besoin vers le ou les
+employés responsables du service en question.
+ 	\paragraph{} Les employés doivent pouvoir consulter leur courrier électronique et en
+envoyer à l’aide d’un client mail classique (i.e. pas webmail) depuis
+l’entreprise, mais ils doivent également être en mesure d’utiliser leur mail en
+déplacement ou à domicile.
+		
+	
+\section{Proposition de solutions techniques}
+	\paragraph{} Nous avons directement pensé à utiliser postfix et dovecot car ce sont les deux services mail les plus utilisés. De plus, ils permettent une grande diversité de fonctions. Nous avons aussi pensé à implémenter spamassasin et fail2ban, afin d'éviter les tentatives de spam, ainsi que le piratage par brute force des comptes mail.
+	\paragraph{} Nous avions aussi pensé à utiliser squirrelmail, mais nous avons abandonné l'idée après plusieurs difficultés rencontrées.
+		
+\section{Rapport sur ce qui a été déployé}
+	\paragraph{} L'ensemble de la configuration postfix et dovecot est terminée, mais nous avons un problème lors du lancement de ces services. De ce fait, il nous est pour le moment impossible de tester quoi que ce soit. 
+	\paragraph{} Nous implémenterons aussi spamassassin et fail2ban si il nous reste du temps une fois que tout fonctionnera comme prévu.
+	
+\section{Explication de la procédure de validation}
+	\paragraph{} Aucune validation n'a encore été faite au niveau du mail.  
+
+\end{document}
