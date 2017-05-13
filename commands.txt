@@ -33,6 +33,8 @@ docker exec -it <mycontainer> bash
 
 netstat -lntup
 
+docker inspect --format '{{ .NetworkSettings.IPAddress}}' e8b6ef279528
+
 
 --------------
 DEBUG ASTERISK
