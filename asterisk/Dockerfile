@@ -4,7 +4,6 @@ MAINTAINER HE201408@students.ephec.be
 RUN yum update -y
 RUN yum install -y epel-release
 RUN yum install -y git kernel-headers gcc gcc-c++ cpp ncurses ncurses-devel libxml2 libxml2-devel sqlite sqlite-devel openssl-devel newt-devel kernel-devel libuuid-devel net-snmp-devel xinetd tar jansson-devel make bzip2 gettext
-RUN yum install -y nano
 
 WORKDIR /tmp
 # pjproject is needed to run asterisk 13
@@ -42,7 +41,7 @@ RUN menuselect/menuselect \
   --enable res_hep_rtcp \
   menuselect.makeopts
 
-# Continue with a standard make.Redirect outpout to trash
+# Continue with a standard make.
 RUN make 1> /dev/null
 RUN make install 1> /dev/null
 RUN make samples 1> /dev/null
@@ -52,10 +51,10 @@ WORKDIR /
 RUN sed -i -e 's/# MAXFILES=/MAXFILES=/' /usr/sbin/safe_asterisk
 
 # Copy config files to appropriate directory
-#ADD users.conf /etc/asterisk/users.conf
-#ADD sip.conf /etc/asterisk/sip.conf
-#ADD extensions.conf /etc/asterisk/extensions.conf
-#ADD voicemail.conf /etc/asterisk/voicemail.conf
+ADD users.conf /etc/asterisk/users.conf
+ADD sip.conf /etc/asterisk/sip.conf
+ADD extensions.conf /etc/asterisk/extensions.conf
+ADD voicemail.conf /etc/asterisk/voicemail.conf
 
 EXPOSE 5060/udp
 EXPOSE 5060/tcp
