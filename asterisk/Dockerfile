@@ -4,6 +4,7 @@ MAINTAINER HE201408@students.ephec.be
 RUN yum update -y
 RUN yum install -y epel-release
 RUN yum install -y git kernel-headers gcc gcc-c++ cpp ncurses ncurses-devel libxml2 libxml2-devel sqlite sqlite-devel openssl-devel newt-devel kernel-devel libuuid-devel net-snmp-devel xinetd tar jansson-devel make bzip2 gettext
+RUN yum install -y nano
 
 WORKDIR /tmp
 # pjproject is needed to run asterisk 13
@@ -41,7 +42,7 @@ RUN menuselect/menuselect \
   --enable res_hep_rtcp \
   menuselect.makeopts
 
-# Continue with a standard make.
+# Continue with a standard make.Redirect outpout to trash
 RUN make 1> /dev/null
 RUN make install 1> /dev/null
 RUN make samples 1> /dev/null
