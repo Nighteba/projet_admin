@@ -51,10 +51,10 @@ WORKDIR /
 RUN sed -i -e 's/# MAXFILES=/MAXFILES=/' /usr/sbin/safe_asterisk
 
 # Copy config files to appropriate directory
-#ADD users.conf /etc/asterisk/users.conf
-#ADD sip.conf /etc/asterisk/sip.conf
-#ADD extensions.conf /etc/asterisk/extensions.conf
-#ADD voicemail.conf /etc/asterisk/voicemail.conf
+ADD users.conf /etc/asterisk/users.conf
+ADD sip.conf /etc/asterisk/sip.conf
+ADD extensions.conf /etc/asterisk/extensions.conf
+ADD voicemail.conf /etc/asterisk/voicemail.conf
 
 EXPOSE 5060/udp
 EXPOSE 5060/tcp
