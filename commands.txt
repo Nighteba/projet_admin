@@ -35,6 +35,10 @@ netstat -lntup
 
 docker inspect --format '{{ .NetworkSettings.IPAddress}}' e8b6ef279528
 
+BAN IP
+-------
+sudo iptables -I DOCKER -s 163.172.194.64 -j DROP
+
 
 
 --------------
