@@ -1,22 +1,67 @@
 #short version config
-#mydomain = wt14.ephec-ti.be
-#myhostname = mail.wt14.ephec-ti.be
-#myorigin = $mydomain
-#mydestination = mail.wt14.ephec-ti.be, wt14.ephec-ti.be, localhost, localhost.localdomain
+mydomain = wt14.ephec-ti.be
+myhostname = mail.wt14.ephec-ti.be
+myorigin = $mydomain
+mydestination = mail.wt14.ephec-ti.be, wt14.ephec-ti.be, localhost, localhost.localdomain
 #Postfix will forward mail from strangers to authorized remote destinations only. Authorized remote destinations defined with the relay_domains
-#relay_domains = $mydestination
-#smtpd_sasl_type = dovecot
-#smtpd_sasl_auth_enable = yes
-#smtpd_recipient_restrictions = permit_sasl_authenticated,permit_mynetworks,reject_unauth_destination
-#smtpd_sasl_path = private/auth
-#relayhost =
-#mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
-#mailbox_size_limit = 0
-#message_size_limit=0
-#recipient_delimiter = +
-#inet_interfaces = all
-#alias_maps = hash:/etc/aliases
-#alias_database = hash:/etc/aliases
+relay_domains = $mydestination
+smtpd_sasl_type = dovecot
+smtpd_sasl_auth_enable = yes
+smtpd_recipient_restrictions = permit_sasl_authenticated,permit_mynetworks,reject_unauth_destination
+smtpd_sasl_path = private/auth
+relayhost =
+mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+mailbox_size_limit = 0
+message_size_limit=0
+recipient_delimiter = +
+inet_interfaces = all
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
 #local_recipient_maps = proxy:unix:passwd.byname $alias_maps
 
 
+#Is in /etc/postfix/main.cf
+#SENDING MAILS
+#The postfix queue for mail that are going to be sent
+#queue_directory = /var/spool/postfix
+#command_directory = /usr/sbin
+#deamon_directory = /usr/libexec/postfix
+#data_directory = /var/lib/postfix
+#mail_owner = samuel
+#myhostname = mail.wt14.ephec-ti.be
+#mydomain = wt14.ephec-ti.be
+#myorigin = $mydomain
+#mailbox_size_limit = 0
+#recipient_delimiter = +
+#relayhost =
+
+#RECEIVING MAILS
+#inet_interfaces = all
+#inet_protocols = all
+#mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+#Recipient address not found : 550 : default : reject ; 450 : try later : until certain that local_recipient_maps settings are ok.
+#unknown_local_recipient_reject_code = 550
+#mynetworks = 127.0.0.0/0
+#alias_maps = hash:/etc/aliases
+#virtual_alias_maps = hash:/etc/postfix/virtual
+#alias_database = hash:/etc/aliases
+#home_mailbox = ~/Maildir/
+#where the unix-style mailboxes are kept
+#mail_spool_directory = /var/spool/mail
+#default postfix newaliases commands
+#sendmail-compatible command to build alias databases
+#sendmail_path = /usr/sbin/sendmail.postfix
+#sendmail-compatible mail queue listing command
+#mailq_path = /usr/bin/mailq.postfix
+#setid_group = postdrop
+#location of postfix html doc
+#html_directory = no
+#location of man pages of postfix
+#manpage_directory = /usr/share/man
+
+#smtp authentification
+#smtpd_sasl_auth_enable = yes
+#To prevent open relay
+#smtpd_recipient_restrictions = permit_mynetworks permit_sasl_authentificated reject_unauth_destination
+#smtpd_sasl_application_name = smtpd
+#smtpd_sasl_security_options = noanonymous
