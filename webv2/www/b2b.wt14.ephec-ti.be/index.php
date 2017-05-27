@@ -1,14 +1,12 @@
 <?php
-include ('mesFonction.inc.php');
+require_once ('dbConnect.inc.php');
+require_once ('mesFonction.inc.php');
 
-    //$dbName = 'shop';
     $sql = "select * from produit";
-    $dbname = "woody";
-    $host="79.137.38.241"
 
     try {
-	//$dbh = new PDO('mysql:host='.$host.';dbname='.$dbname.,'root','vulcain');
-	$dbh = new PDO('mysql:host=79.137.38.241;dbname=woody','root','vulcain');
+	$dbh = new PDO('mysql:host=193.190.65.94;dbname=1617he201408','PETRE','SamuelFv77');
+	//$dbh = new PDO('mysql:host=79.137.38.241;dbname=woody','root','vulcain');
         //$dbh = new PDO('mysql:host='.getServer().';dbname='.$dbName, 'PETRE', 'SamuelFv77');
         $donnee = $dbh->query($sql);
                                 $donnee->execute();
