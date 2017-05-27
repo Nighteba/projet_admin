@@ -9,9 +9,9 @@ wt14.ephec-ti.be.       IN      SOA     ns1.wt14.ephec-ti.be. HE201408@students.
 wt14.ephec-ti.be.       IN      NS      ns1.wt14.ephec-ti.be.
 
 ns1.wt14.ephec-ti.be.   IN      A       79.137.38.245
-www.wt14.ephec-ti.be.   IN      A       79.137.38.245
-b2b.wt14.ephec-ti.be.   IN      A       79.137.38.245
-intranet.wt14.ephec-ti.be.      IN      A       79.137.38.245
+www.wt14.ephec-ti.be.   IN      A       79.137.38.241
+b2b.wt14.ephec-ti.be.   IN      A       79.137.38.241
+intranet.wt14.ephec-ti.be.      IN      A       79.137.38.241
 wt14.ephec-ti.be.       IN     MX  5   mail.wt14.ephec-ti.be.
 mail.wt14.ephec-ti.be.  IN      A       79.137.38.245
 voip                    IN      A       79.137.38.245
