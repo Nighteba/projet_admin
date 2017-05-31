@@ -22,3 +22,10 @@ use shop
 create table produit (npro varchar(4), libelle varchar(100), prix int, qstock int);
 
 insert into produit (npro, libelle, prix, qstock) values("AR01", "Generateur", 150, 24),("BR01", "visse", 1, 350),("CL01", "clou", 1, 350),("CR01", "marteau", 15, 80);
+
+
+
+
+----------------------------------------------
+VOIR WIKI POUR PLUS DES INSTRUCTIONS COMPLETES
+----------------------------------------------
