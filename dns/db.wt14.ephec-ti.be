@@ -15,5 +15,6 @@ intranet.wt14.ephec-ti.be.      IN      A       79.137.38.245
 wt14.ephec-ti.be.       IN     MX  5   mail.wt14.ephec-ti.be.
 mail.wt14.ephec-ti.be.  IN      A       79.137.38.245
 voip                    IN      A       79.137.38.245
+cloud                   IN      A       79.137.38.245
 
 _sip._udp               IN      SRV 0 0 5060 voip
