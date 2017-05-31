@@ -3,6 +3,7 @@ mydomain = wt14.ephec-ti.be
 myhostname = mail.wt14.ephec-ti.be
 myorigin = $mydomain
 mydestination = mail.wt14.ephec-ti.be, wt14.ephec-ti.be, localhost, localhost.localdomain
+# Utilise l'implementation Dovecot de l authentification SASL
 smtpd_sasl_type = dovecot
 smtpd_sasl_auth_enable = yes
 smtpd_recipient_restrictions = permit_sasl_authenticated,permit_mynetworks,reject_unauth_destination
