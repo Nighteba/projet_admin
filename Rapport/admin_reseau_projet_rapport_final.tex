@@ -1,0 +1,240 @@
+\documentclass[a4paper,12pt]{article}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+
+\usepackage{vmargin}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\let\oldtheta\theta
+\renewcommand{\theta}{\ensuremath{\oldtheta}}
+
+%\addtolength{\textwidth}{1cm}
+%\usepackage{geometry}
+\setlength{\parindent}{0mm}
+
+\renewcommand{\arraystretch}{2}
+
+\begin{document}
+
+% Page de titre
+\titlepage{
+	\today \\[2cm]
+	\begin{flushright}\sf\Huge
+	{\bfseries Administration système et réseaux II} \\[3mm]
+	{\huge Rapport final}
+	\end{flushright}
+	\ \\[2cm]
+	\begin{center}
+	
+\end{center}
+	\vspace{4cm}
+	Samuel Petre, Quentin Puttemans, Arnaud Renard - Groupe 14 - 2TL2\\
+}
+
+\clearpage
+
+%\vspace{5cm}
+\section{Cahier des charges}
+	\paragraph{} L'entreprise Woodytoys nous demande d'implémenter une architecture permettant la mise en place de trois services web. Le nom de domaine de base sera wt14.ephec-ti.be. Nous aurons donc trois noms de domaine à gérer : \begin{itemize}
+	\item www.wt14.ephec-ti.be
+	\item b2b.wt14.ephec-ti.be
+	\item intranet.wt14.ephec-ti.be
+	\end{itemize}
+	\paragraph{} www.wt14.ephec-ti.be sera un site statique.
+	\paragraph{} b2b.wt14.ephec-ti.be sera un site dynamique comportant une base de données permettant aux revendeurs de passer des commandes.
+	\paragraph{} intranet.wt14.ephec-ti.be sera un site permettant aux employés d'avoir accès à un l'intranet. Ce site sera donc impossible à atteindre depuis l'Internet.
+	
+	\paragraph{} L’entreprise souhaite aussi disposer d’une adresse mail liée à son domaine. C’est
+à dire, de type nom.prenom@wt14.ephec-ti.be. De plus, il devra être possible de
+créer des adresses mail génériques, telles que contact@wt14.ephec-ti.be qui seront
+redirigées vers la personne responsable du service.
+	\paragraph{} Les employés doivent pouvoir consulter et envoyer des e-mails aussi bien à l’intérieur
+de l’entreprise qu’à l’extérieur.
+	\paragraph{} L’entreprise souhaite aussi que l’ensemble de ses employés puisse communiquer
+entre eux via des postes téléphoniques IP. Certains employés devront aussi être
+capables de communiquer avec le monde extérieur. Il existe différents types d’employés
+: \begin{itemize}
+	\item Les ouvriers : Ils disposent d’un poste de téléphonie IP dans leur atelier pour
+joindre les autres départements internes.
+	\item La secrétaire : Elle dispose d’un PC sur lequel se trouve un softphone, lui permettant
+de contacter n’importe qui.
+	\item Le service comptable : réparti dans deux bureaux, il dispose d’un numéro unique
+permettant de joindre le premier comptable disponible, ainsi que d’un numéro
+spécifique par bureau. Les comptables peuvent joindre l’extérieur et tout le monde
+en interne à l’exception du directeur.
+	\item Les commerciaux : réunis dans un même bureau, ils peuvent joindre l’extérieur
+et tout le monde en interne à l’exception du directeur. Ils disposent également de
+smartphones avec lesquels ils peuvent téléphoner en déplacement.
+	\item La direction : Un numéro qui peut joindre tous les autres postes internes ainsi
+que l’extérieur. Ce numéro ne peut pas être joint directement, les appels devant
+transiter préalablement par la secrétaire.
+\end{itemize}
+	\paragraph{} Les employés doivent chacun disposer d’une boite vocale.
+	
+	\paragraph{} L’entreprise Woodytoys allant bientôt fusionner avec une entreprise possédant
+une structure interne similaire, il nous est demandé que les employés puissent aussi
+contacter les membres de cette autre entreprise.
+	\paragraph{}L’entreprise souhaiterait aussi, mais optionnellement, un service de partage de
+fichiers afin de pouvoir centraliser les documents utilisés par les employés.
+Chaque employé doit disposer de son répertoire personnel, de même que le directeur
+et la secrétaire.
+Chaque groupe d’employés doit disposer d’un répertoire commun.
+Les employés doivent pouvoir accéder aux fichiers partagés via l’explorateur natif
+du système
+Le système doit pouvoir être sauvegardé en copie (backup) facilement.
+Les employés doivent avoir la possibilité d’accéder à leurs fichiers à l’extérieur de
+l’entreprise.
+	\paragraph{}Nous devons donc implémenter et configurer adéquatement un serveur web, un
+résolveur DNS, une base de données, trois pages web, un serveur SMTP, un serveur
+IMAP/POP3, un service VoIP, ainsi qu’un serveur de partage de fichiers (optionnel).	
+	
+	
+\section{Proposition de solutions techniques}
+	\paragraph{} Afin de pouvoir accéder aux 3 pages web demandées, nous avions premièrement
+besoin d’un serveur web. Nous avons choisi d’utiliser le serveur web Apache, car c’est
+le web serveur le plus répandu sur les machines Linux, et le deuxième plus répandu,
+tous systèmes d’exploitation confondus. Le serveur web Apache ayant été le serveur
+le plus populaire depuis 1996, celui-ci dispose d’une documentation très complète.
+Sa popularité n’est bien sûr pas le seul élément ayant contribué à notre choix, car,
+en effet, Apache perd en popularité, contrairement à son concurrent, Nginx. Ce qui
+nous a fait décider d’utiliser Apache est tout simplement son support interne natif
+pour les contenus dynamiques, contrairement à Nginx qui nécessite une intervention
+extérieure. Ce support natif rend la configuration plus simple à déployer.
+	\paragraph{} Pour le site d’e-commerce, nous avions aussi besoin d’une base de données, afin de
+pouvoir enregistrer l’ensemble des produits. Nous avons renoncé notre idée de base
+qui était d’installer la base de données sur un serveur distant, afin de ne pas être
+dépendant au niveau sécurité, mais aussi accessibilité du serveur distant. En effet, si
+le serveur distant venait à fermer, il n’y aurait plus aucun accès à la base de donnée,
+ni même de sauvegarde. En décidant de mettre notre base de données sur un serveur
+local, nous avons un contrôle intégral dessus. Nous avons choisi d’utiliser un serveur
+MySQL, celui-ci étant le plus efficace pour la tâche à accomplir. De plus, cela nous
+permettait d’utiliser le web stack LAMP (Linux, Apache, MySQl, PHP), qui est une
+combinaison de programmes complètement gratuits et open-source, ce qui est aussi
+signe de plus de sécurité : les failles étant découvertes et réparées plus souvent.
+\\
+\\
+	\paragraph{} Troisièmement, pour accéder aux 3 pages web demandées, nous avions aussi besoin
+d’un résolveur DNS. Cela permet de pouvoir visiter les pages web via leur nom et
+pas l’adresse IP du serveur sur lequel elles se trouvent. Nous utilisons ici le BIND,
+qui est le serveur DNS le plus utilisé sur internet (79% des serveurs en 2008).
+	\paragraph{} En ce qui concerne l’infrastructure mail, nous avions besoin d’un serveur SMTP
+qui se charge d’envoyer des mails, et un serveur POP3/IMAP qui se charge de récupérer
+les mails. Comme serveur SMTP, nous avons choisi d’utiliser Postfix pour
+sa vitesse défiant toute concurrence, sa robustesse et sa sécurité. Nous avons privilégié
+Postfix par rapport à d’autres serveurs SMTP (Exim, par exemple), car il a la
+particularité d’être très modulaire, ce qui permet de n’utiliser et configurer que ce
+qu’on a besoin.
+	\paragraph{} Nous avions ensuite le choix entre utiliser POP3 ou IMAP pour recevoir et lire les
+mails, ou les deux. Nous avons choisi de n’utiliser que IMAP, celui-ci permettant la
+synchronisation de plusieurs appareils. En effet, POP3 ne permet de télécharger les
+mails que sur un seul appareil. Nous utilisons Dovecot, car il va de pair et fonctionne
+très bien avec Postfix.
+	\paragraph{} Nous voulions aussi installer Squirrelmail, qui permet de consulter ses mails depuis
+un navigateur internet (contrairement à un logiciel si Squirrelmail n’est pas installé),
+mais par manque de temps, nous avons abandonné l’idée.
+	\paragraph{} Nous devions ensuite déployer un moyen de communication par voix par IP. Pour
+ce faire, nous avions besoin d’un logiciel permettant l’appel gratuit entre employés
+à l’intérieur d’une entreprise. Nous nous sommes vite penché le logiciel Asterisk.
+Asterisk est devenu un standard dans les systèmes modernes de voix par IP. C’est
+un logiciel open-source, puissant et flexible. Cela permet le développement de l’entreprise
+Woodytoys sans devoir trop changer le système de voix par IP.
+	\paragraph{} Une autre alternative à Asterisk était FreeSwitch, mais Freeswitch demande une
+machine plus performante pour bien fonctionner. Notre machine de développement
+n’étant pas suffisamment puissante, nous avons opté pour Asterisk, qui lui, peut
+tourner sur des machines très basiques.
+	\paragraph{} La solution actuelle peut gérer 99 employés de chaque branche (y compris secrétaires
+et directeurs) pour la structure locale. L’entreprise avec laquelle la fusion
+s’opère peut aussi gérer 99 employés dans chaque branche. Le 100e numéro est destiné
+aux différentes boites vocales.
+
+	\paragraph{} Pour le système de partage de fichiers, nous avons très vite opté pour une solution rendant facile l'accès aux fichiers. Nous avons donc choisi Owncloud, celui-ci permettant facilement l'accès via un navigateur web. De plus, Owncloud est un outil open source et un des outil les plus populaire en ce qui concerne le partage de fichiers via un serveur privé.
+
+\section{Rapport sur ce qui a été déployé}
+	\paragraph{} En ce qui concerne la partie web, les trois pages sont accessibles respectivement
+sous les URL 
+\begin{itemize}
+	\item www.wt14.ephec-ti.be
+	\item b2b.wt14.ephec-ti.be
+	\item intranet.wt14.ephec-ti.be
+\end{itemize}
+	\paragraph{} La page www est une page statique, la page b2b est une page dynamique, communiquant
+avec une base de données. Ces deux pages sont accessibles à tout le monde.
+La page intranet, elle, n’est disponible qu’à l’intérieur de l’entreprise. Essayer d’y
+accéder en dehors affichera une page d’erreur.
+	\paragraph{} La base de données est déployée en local et est fonctionnelle. Elle est utilisée via
+le site dynamique b2b.wt14.ephec-ti.be.
+	\paragraph{} Pour ce qui est des mails, il est possible de les consulter uniquement à l’intérieur
+de l’entreprise. Il est possible de recevoir des mails de tout le monde (interne et
+externe), mais il n’est possible d’en envoyer qu’à partir de l’intérieur de l’entreprise
+vers un collègue à l’intérieur de l’entreprise.
+	\paragraph{} Les adresses mail génériques sont fonctionnelles et redirigent pour le moment vers
+un compte par défaut.
+	\paragraph{} Pour ajouter, supprimer, ou modifier une adresse mail ou une adresse mail générique,
+il faut se référer au wiki du Github (mode d’emploi).
+	\paragraph{} Pour le système de communication par voix par IP, l’ensemble des employés
+peuvent communiquer entre eux. Seule la secrétaire peut contacter directement le
+directeur. De plus, les comptables possèdent un numéro permettant d’appeler le
+premier comptable disponible.
+	\paragraph{} Chaque membre de l’entreprise possède une boite vocale. Nous avons choisi de
+donner un numéro de boite vocale différent par section (secrétaire, comptable, ouvriers,
+etc.) afin d’assurer une meilleure organisation.
+	\paragraph{} La fusion avec une autre entreprise a été un succès. Il est donc possible pour l’ensemble
+des employés de chaque entreprise de communiquer avec leurs collègues se
+trouvant dans l’autre entreprise et étant connecté au réseau de leur entreprise.
+
+	\paragraph{} Le Owncloud est entièrement déployé. Un groupe a été créé pour chaque branche de l'entreprise, et des employés de base y ont été ajouté. Chaque membre dispose d'un répertoire personnel, de plus qu'un répertoire partagé avec l'ensemble des membres de sa branche. Le directeur dirige toutes les branches, et a donc la permission d'ajouter, supprimer et modifier le compte d'un employé. 
+	
+\section{Explication de la procédure de validation}
+	\paragraph{} Pour vérifier le fonctionnement du site statique, nous nous sommes tout simplement
+rendus sur http ://www.wt14.ephec-ti.be/ via une machine externe afin d’être
+certains que le site soit accessible depuis internet.
+	\paragraph{} Nous avons fait de même pour le site dynamique, mais cette fois-ci avec le lien
+http ://b2b.wt14.ephec-ti.be/. 
+	\paragraph{} Pour l’intranet, nous avons vérifié qu’accéder au site depuis une machine externe à
+l’entreprise (ici, toutes autres machines que nos 3 vps) nous renvoie bien sur la page
+d’erreur et non la page de l’intranet. Ensuite, une fois cela fait, nous avons accédé
+au site depuis une machine de l’entreprise, et cette fois-ci, la page de l’intranet était
+bien disponible.
+	\paragraph{} La procédure de vérification du mail fut, quant à elle, plus longue. Premièrement,
+nous avons vérifié que nous pouvions envoyer et recevoir des mails en local. Pour ce
+faire, nous avons créé deux nouvelles adresses mail et avec l’une d’entre elles, nous
+avons envoyé un message à l’autre. L’autre a bien reçu et peut lire le message avec
+succès. Ensuite, nous avons envoyé un mail à une adresse interne depuis une adresse
+Gmail. Le mail a été envoyé et reçu avec succès.
+	\paragraph{} Nous avons ensuite essayé d’envoyer un mail depuis une adresse locale vers une
+adresse Gmail, mais les messages n’arrivent jamais. Pire encore, ils sont détectés
+comme du spam. Nous pensons que cela vient du fait que nous n’avons pas implémenté
+de certificats SSL. Nous pouvons nous connecter sur notre compte mail
+depuis l’extérieur via un logiciel comme Thunderbird, mais il n’est pas possible de
+récupérer nos e-mails. Encore une fois, nous pensons à un problème lié au manque
+de certificats SSL.
+	\paragraph{} Pour le système de voix par IP Asterisk, nous avons tout d’abord testé que l’on
+peut se connecter au serveur soit en utilisant l’adresse IP, soit en utilisant le nom de
+domaine (voip.wt14.ephec-ti.be). Une fois que cela a fonctionné, nous avons testé un
+par un chaque service demandé dans le cahier des charges (seule la secrétaire peut
+appeler le directeur, etc.). L’ensemble des fonctionnalités fonctionne, à l’exception
+que nous n’avons pas testé si l’on pouvait joindre l’extérieur, et si l’extérieur peut
+joindre la secrétaire.
+	\paragraph{} Pour ce qui est de la fusion d’entreprise, nous avons repris les mêmes démarches
+que plus haut, à l’exception qu’une personne était connectée à une entreprise, et
+l’autre était connectée à l’autre entreprise.
+
+	\paragraph{} Pour valider le Owncloud, nous nous sommes tout simplement rendu sur cloud.wt14.ephec-ti.be:8080 et nous avons testé le dossiers partagés ainsi que les dossiers personnels de plusieurs membres.
+
+\section{Sources}
+	\begin{itemize}
+		\item https ://news.netcraft.com/archives/2016/02/22/february-2016-web-server-survey.html
+(Répartition des différents serveurs web sur le marché)
+		\item https ://fr.wikipedia.org/wiki/BIND (Pourcentage d’utilisation de BIND)
+		\item https ://www.whichvoip.com/freeswitch-vs-asterisk.htm (Asterisk-FreeSwitch : Système
+requis)
+	\end{itemize}
+
+\end{document}
